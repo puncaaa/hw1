@@ -1,0 +1,36 @@
+{% extends 'layouts/navbar.html' %}
+
+{% block content %}
+    <h2>{{ nt.title }}</h2>
+    <p>{{ nt.content }}</p>
+    <p>Author: {{ nt.author.username }}</p>
+    <p>Created at: {{ nt.created_at }}</p>
+    <p>Updated at: {{ nt.updated_at }}</p>
+
+
+    <h2>Комментарии</h2>
+    <div id="commentsSection">
+        {% if nt.comments.all %}
+            {% for comment in nt.comments.all %}
+                <p>{{ comment.author.username }} : {{ comment.text }}</p>
+            {% endfor %}
+        {% else %}
+            <p>Пока пусто</p>
+        {% endif %}
+    </div>
+
+    {% if user.is_authenticated %}
+        {% include 'nts/comment_form.html' %}
+    {% endif %}
+
+    {% if user.is_authenticated and user == nt.author %}
+        <a href="{% url 'edit_nt' pk=nt.id %}">Редактировать</a>
+        <a href="{% url 'delete_nt' pk=nt.id %}">Удалить</a>
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+

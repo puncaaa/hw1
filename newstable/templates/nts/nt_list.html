@@ -1,0 +1,39 @@
+{% extends 'layouts/navbar.html' %}
+
+{% block content %}
+    <h2>Объявления</h2>
+    <a href="{% url 'create_nt' %}">Создать объявление</a>
+
+    {% for nt in nts %}
+<br>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ nt.title }}</h5>
+                <p class="card-text">{{ nt.content }}</p>
+                <p>Author: {{ nt.author.username }}</p>
+                <p>Created at: {{ nt.created_at }}</p>
+                <p>Updated at: {{ nt.updated_at }}</p>
+                <a href="{% url 'nt_detail' pk=nt.pk %}">Детали</a>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+
+<!--    <div class="pagination">-->
+<!--        <span class="step-links">-->
+<!--            {% if nts.has_previous %}-->
+<!--                <a href="?page=1">Первый</a>-->
+<!--                <a href="?page={{ nts.previous_page_number }}">Последний</a>-->
+<!--            {% endif %}-->
+
+<!--            <span class="current">-->
+<!--                Страница {{ nts.number }} of {{ nts.paginator.num_pages }}.-->
+<!--            </span>-->
+
+<!--            {% if nts.has_next %}-->
+<!--                <a href="?page={{ nts.next_page_number }}">Следующий</a>-->
+<!--                <a href="?page={{ nts.paginator.num_pages }}">Назад</a>-->
+<!--            {% endif %}-->
+<!--        </span>-->
+<!--    </div>-->
+{% endblock %}

@@ -1,0 +1,7 @@
+{% if comments %}
+    {% for comment in comments %}
+        <p>{{ comment.author.username }}: {{ comment.text }}</p>
+    {% endfor %}
+{% else %}
+    <p>Пусто</p>
+{% endif %}
